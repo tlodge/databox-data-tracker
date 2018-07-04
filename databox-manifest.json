@@ -31,7 +31,7 @@
         {
             "type": "personalFlow",
             "required": true,
-            "name": "personalflow",
+            "name": "personalFlow",
             "clientid": "personalFlow",
             "granularities": []
         }
