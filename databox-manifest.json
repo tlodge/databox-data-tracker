@@ -1,0 +1,43 @@
+{
+    "manifest-version": 1,
+    "name": "databox-data-tracker",
+    "version": "0.1.0",
+    "description": "see what is flowing",
+    "author": "tlodge",
+    "licence": "MIT",
+    "databox-type": "app",
+    "tags": [
+        "test"
+    ],
+    "homepage": "https://github.com/tlodge/databox-data-tracker",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tlodge/databox-data-tracker.git"
+    },
+    "packages": [
+        {
+            "id": "data-tracker-package",
+            "name": "data tracker package",
+            "purpose": "to track personal flows of all sdk-built apps",
+            "required": false,
+            "datastores": [
+                "personalFlow"
+            ],
+            "benefits": "full overview of what data is flowing where"
+        }
+    ],
+    "allowed-combinations": [],
+    "datasources": [
+        {
+            "type": "personalFlow",
+            "required": true,
+            "name": "personalflow",
+            "clientid": "personalFlow",
+            "granularities": []
+        }
+    ],
+    "network-permissions": [],
+    "resource-requirements": {},
+    "volumes": [],
+    "export-whitelist": []
+}
