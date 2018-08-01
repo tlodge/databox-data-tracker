@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "target": "node",
   "scripts": {
     "build": "export NODE_ENV='production' && webpack --progress --colors",
     "start": "node ./build/data_tracker.js"
@@ -16,14 +17,16 @@
     "babel-preset-stage-0": "^6.24.1",
     "node-loader": "^0.6.0",
     "webpack": "^4.12.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
-    "node-databox": "0.7.7",
-    "ejs": "^2.6.1"
+    "node-databox": "^0.7.7",
+    "socket.io": "^2.1.1"
   }
 }

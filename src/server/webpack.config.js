@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 module.exports = {
     entry: {
         data_tracker: './server.js'
@@ -10,6 +11,7 @@ module.exports = {
     },
     mode: "production",
     target: "node",
+    externals: [nodeExternals()],
     module: {
         rules: [
             {

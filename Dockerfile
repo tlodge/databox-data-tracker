@@ -15,7 +15,7 @@ ADD ./src/server/build build
 RUN npm run build
 
 LABEL databox.type="app"
-
+LABEL databox.manifestURL="/databox-data-tracker/databox-manifest.json"
 EXPOSE 8080
 
 CMD ["npm","start"]
