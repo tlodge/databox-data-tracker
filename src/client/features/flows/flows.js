@@ -1,6 +1,6 @@
 import { createStructuredSelector, createSelector } from 'reselect';
 import { get, post } from '../../utils/net';
-import io from 'socket.io-client';
+//import * as WebSocket from 'ws';
 import { convertToJSON } from '../../utils/svg';
 import { behaviour, family, ownership, physical, professional, contact, biometric, consumption, credentials, criminal, education, ethnicity, finances, health, history, home, preferences, religion, sexual, social, state, tracking, summary } from './svgs'
 
@@ -63,6 +63,9 @@ function connectingToServer() {
 }
 
 function connectToServer() {
+
+    console.log("ok connect to server has been called!!!");
+    
     return (dispatch, getState) => {
         dispatch(connectingToServer());
         let pathname = "";
@@ -75,7 +78,27 @@ function connectToServer() {
             }
         }
 
-        const socket = io('/databox-data-tracker', { path: `${pathname}/ui/socket.io` });
+       /* let ws = new WebSocket(`wss://${window.location.host}${pathname}/ui/ws`);
+      
+        ws.onopen = function(evt) {
+            console.log("OPEN");
+            ws.send("this is my first message!!");
+        }
+        
+        ws.onclose = function(evt) {
+          console.log("CLOSE");
+          ws = null;
+        }
+      
+        ws.onmessage = function(evt) {
+          console.log("RESPONSE: " + evt.data);
+        }
+      
+        ws.onerror = function(evt) {
+          console.log("ERROR: " + evt.data);
+        }*/
+
+        /*const socket = io('/databox-data-tracker', { path: `${pathname}/ui/socket.io` });
 
         socket.on("connect", function () {
             socket.emit("join", "webapp");
@@ -83,7 +106,7 @@ function connectToServer() {
 
         socket.on("data", function (data) {
             dispatch(newFlow(data));
-        });
+        });*/
     }
 }
 

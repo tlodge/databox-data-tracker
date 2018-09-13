@@ -20,12 +20,22 @@
             "name": "data tracker package",
             "purpose": "to track personal flows of all sdk-built apps",
             "required": false,
-            "datastores": [],
+            "datastores": [
+                "personalFlow"
+            ],
             "benefits": "full overview of what data is flowing where"
         }
     ],
     "allowed-combinations": [],
-    "datasources": [],
+    "datasources": [
+        {
+            "type": "personalFlow",
+            "required": true,
+            "name": "personalFlow",
+            "clientid": "personalFlow",
+            "granularities": []
+        }
+    ],
     "network-permissions": [],
     "resource-requirements": {},
     "volumes": [],

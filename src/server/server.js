@@ -4,7 +4,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs"
 import databox from 'node-databox';
-import socket from 'socket.io';
+//import socket from 'socket.io';
+import * as WebSocket from 'ws';
 
 let personalDatastore = {}
 const PORT = process.env.port || '8080';
@@ -35,28 +36,19 @@ app.get("/status", function (req, res) {
 console.log("[->Creating https server<-]", PORT);
 const server = https.createServer(credentials, app).listen(PORT);
 
-const io = socket({ path: "/ui/socket.io" }).listen(server);
-const nsp = io.of('/databox-data-tracker');
-console.log("set up websocket");
+const wss = new WebSocket.Server({ server, path:"/ui/ws" });
 
-nsp.on('connection', function (socket) {
-
-    socket.on('join', function (app) {
-        console.log("seen a join request, joining client to room ", app);
-        socket.join(app);
-        //return app; 
+wss.on('connection', (ws) => {
+    ws.on('message', (message) => {
+        //log the received message and send it back to the client
+        console.log('received: %s', message);
+        ws.send(`Hello, you sent -> ${message}`);
     });
-
-    socket.on('leave', function (app) {
-        console.log("leaving room: " + app);
-        socket.leave(app);
-    });
-
-    socket.on('disconnect', function () {
-        console.log("webserver seen socket disconnect!");
-    });
-
+    //send immediatly a feedback to the incoming connection    
+    ws.send('Hi there, I am a WebSocket server');
 });
+
+console.log("set up websocket");
 
 
 databox.HypercatToSourceDataMetadata(process.env[`DATASOURCE_personalFlow`]).then((data) => {
@@ -67,8 +59,7 @@ databox.HypercatToSourceDataMetadata(process.env[`DATASOURCE_personalFlow`]).the
 }).then((emitter) => {
 
     emitter.on('data', (data) => {
-        //console.log("seen data, sending", JSON.parse(JSON.parse(data.data).data))
-        nsp.to("webapp").emit("data", JSON.parse(JSON.parse(data.data).data));
+        console.log("seen data, sending", JSON.parse(JSON.parse(data.data).data))
     });
 
     emitter.on('error', (err) => {

@@ -58,7 +58,7 @@
     "build": "node scripts/build.js && rm -rf ./src/server/www/ui && mv build/static/ ./src/server/www/ui && mv build/databox-data-tracker/ui/media ./src/server/www/ui/media",
     "test": "node scripts/test.js --env=jsdom",
     "docker": "docker build  -t databox-data-tracker .",
-    "tag": "docker tag databox-data-tracker databox-data-tracker:0.4.0",
+    "tag": "docker tag databox-data-tracker databoxsystems/databox-data-tracker-amd64:0.5.0",
     "deploy": "npm run build && npm run docker && npm run tag"
   },
   "devDependencies": {
